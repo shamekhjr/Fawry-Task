@@ -1,5 +1,6 @@
 package models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cart {
@@ -23,6 +24,11 @@ public class Cart {
     }
 
     public void addProductToCart(Product product, int purchasedQuantity) {
+
+        if (product.isExpires() && LocalDate.now().isAfter(product.getExpiryDate())) {
+            throw new IllegalArgumentException("Cannot add expired product to cart.");
+        }
+
         product.setPurchasedQuantity(purchasedQuantity);
         products.add(product);
     }
