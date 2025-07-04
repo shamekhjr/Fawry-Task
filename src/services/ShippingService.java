@@ -35,6 +35,12 @@ public class ShippingService {
         double totalWeight = customer.getCart().getTotalWeight() / 1000;
         double totalShippingCost = calculateShippingCost(totalWeight);
 
+        if (customer.getCustomerBalance() < (totalPrice + totalShippingCost)) {
+            throw new IllegalArgumentException("Insufficient balance for checkout.");
+        }
+
+        customer.setCustomerBalance(customer.getCustomerBalance() - totalPrice);
+
         System.out.println("** Shipment notice **");
         for (Product product: customer.getCart().getProducts()) {
             if (product.isShippable()) {
@@ -51,8 +57,8 @@ public class ShippingService {
             System.out.println(product.getPurchasedQuantity() + "x " + product.getName() + "      " + product.getPrice() * product.getPurchasedQuantity());
         }
         System.out.println("-------------------------");
-        System.out.println("Subtotal: " + totalPrice);
-        System.out.println("Shipping: " + totalShippingCost);
-        System.out.println("Amount: "+ (totalPrice + totalShippingCost));
+        System.out.println("Subtotal       " + totalPrice);
+        System.out.println("Shipping       " + totalShippingCost);
+        System.out.println("Amount         "+ (totalPrice + totalShippingCost));
     }
 }

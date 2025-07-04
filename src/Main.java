@@ -20,7 +20,7 @@ public class Main {
                 null, true, 500.0); // 0.5kg
 
         // Create customer
-        Customer customer = new models.Customer("Alice", "alice@example.com");
+        Customer customer = new models.Customer("Alice", "alice@example.com", 5000.0);
 
         // Add products to cart
         customer.getCart().addProductToCart(apple, 6);   // Not shippable

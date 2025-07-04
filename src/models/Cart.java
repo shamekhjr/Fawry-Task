@@ -33,6 +33,16 @@ public class Cart {
         products.add(product);
     }
 
+    public void removeProductFromCart(Product product) {
+        if (products.contains(product)) {
+            products.remove(product);
+            product.setStock(product.getStock() + product.getPurchasedQuantity());
+            product.setPurchasedQuantity(0);
+        } else {
+            throw new IllegalArgumentException("Product not found in cart.");
+        }
+    }
+
     public boolean isEmpty() {
         return products == null || products.isEmpty();
     }

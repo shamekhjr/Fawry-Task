@@ -6,14 +6,16 @@ public class Customer {
     private String customerName;
     private String customerEmail;
     private Cart cart;
+    private double customerBalance;
 
     // Constructors
     public Customer() {}
 
-    public Customer(String customerName, String customerEmail) {
+    public Customer(String customerName, String customerEmail, double customerBalance) {
         this.customerEmail = customerEmail;
         this.customerName = customerName;
         this.cart = new Cart();
+        this.customerBalance = customerBalance;
     }
 
     public Customer(String customerName, String customerEmail, Cart cart) {
@@ -35,6 +37,10 @@ public class Customer {
         return this.cart;
     }
 
+    public double getCustomerBalance() {
+        return this.customerBalance;
+    }
+
     // Setters
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
@@ -46,6 +52,13 @@ public class Customer {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public void setCustomerBalance(double customerBalance) {
+        if (customerBalance < 0.0) {
+            throw new IllegalArgumentException("Customer balance must not be a negative number.");
+        }
+        this.customerBalance = customerBalance;
     }
 
 

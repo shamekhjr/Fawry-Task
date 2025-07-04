@@ -100,6 +100,14 @@ public class Product implements Shippable {
         }
 
         this.purchasedQuantity = purchasedQuantity;
+        this.stock -= purchasedQuantity;
+    }
+
+    public void setStock(int stock) {
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock must not be a negative number.");
+        }
+        this.stock = stock;
     }
 
 
