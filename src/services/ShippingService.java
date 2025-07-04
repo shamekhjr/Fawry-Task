@@ -33,6 +33,7 @@ public class ShippingService {
     public void checkout(Customer customer) {
         double totalPrice = customer.getCart().getTotalPrice();
         double totalWeight = customer.getCart().getTotalWeight() / 1000;
+        double totalShippingCost = calculateShippingCost(totalWeight);
 
         System.out.println("** Shipment notice **");
         for (Product product: customer.getCart().getProducts()) {
@@ -40,7 +41,7 @@ public class ShippingService {
                 System.out.println(product.getPurchasedQuantity() +"x " + product.getName()+"      "+product.getWeight() * product.getPurchasedQuantity()+"g");
             }
         }
-        System.out.println("Total package weight: " + customer.getCart().getTotalWeight() / 1000 + "kg");
+        System.out.println("Total package weight: " + totalWeight + "kg");
         System.out.println();
         System.out.println();
 
@@ -51,7 +52,7 @@ public class ShippingService {
         }
         System.out.println("-------------------------");
         System.out.println("Subtotal: " + totalPrice);
-        System.out.println("Shipping: " + calculateShippingCost(totalWeight));
-        System.out.println("Amount: "+ (totalPrice + totalWeight));
+        System.out.println("Shipping: " + totalShippingCost);
+        System.out.println("Amount: "+ (totalPrice + totalShippingCost));
     }
 }
